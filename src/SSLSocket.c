@@ -99,7 +99,10 @@ static int SSLSocket_error(char* aString, SSL* ssl, int sock, int rc, int (*cb)(
 
     FUNC_ENTRY;
     if (ssl)
+    {
         error = SSL_get_error(ssl, rc);
+        ERR_clear_error();
+    }
     else
         error = ERR_get_error();
     if (error == SSL_ERROR_WANT_READ || error == SSL_ERROR_WANT_WRITE)
